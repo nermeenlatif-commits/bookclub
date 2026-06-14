@@ -6,10 +6,7 @@
 <title>Book Club</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-  /* ── CONFIG: paste your Supabase values in the <script> below ── */
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
     --ink: #1a1a1a;
     --ink-soft: #555;
@@ -26,334 +23,84 @@
     --font-display: Georgia, 'Times New Roman', serif;
     --font-body: system-ui, -apple-system, sans-serif;
   }
-
-  body {
-    font-family: var(--font-body);
-    background: var(--page);
-    color: var(--ink);
-    min-height: 100vh;
-    font-size: 16px;
-    line-height: 1.6;
-  }
-
-  /* ── HEADER ── */
-  .site-header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--rule);
-    padding: 0 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    height: 56px;
-  }
-  .site-logo {
-    font-family: var(--font-display);
-    font-size: 20px;
-    font-weight: normal;
-    color: var(--ink);
-    flex: 1;
-  }
+  body { font-family: var(--font-body); background: var(--page); color: var(--ink); min-height: 100vh; font-size: 16px; line-height: 1.6; }
+  .site-header { background: var(--surface); border-bottom: 1px solid var(--rule); padding: 0 1.5rem; display: flex; align-items: center; gap: 1rem; height: 56px; }
+  .site-logo { font-family: var(--font-display); font-size: 20px; font-weight: normal; color: var(--ink); flex: 1; }
   .site-logo span { color: var(--accent); }
-  .header-btn {
-    font-size: 13px;
-    padding: 5px 12px;
-    border-radius: 6px;
-    border: 1px solid var(--rule);
-    background: none;
-    color: var(--ink-soft);
-    cursor: pointer;
-    font-family: var(--font-body);
-  }
+  .header-btn { font-size: 13px; padding: 5px 12px; border-radius: 6px; border: 1px solid var(--rule); background: none; color: var(--ink-soft); cursor: pointer; font-family: var(--font-body); }
   .header-btn:hover { background: var(--page); }
-
-  /* ── LAYOUT ── */
   .container { max-width: 680px; margin: 0 auto; padding: 2rem 1.5rem; }
   .container-wide { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
-
-  /* ── CARDS ── */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-  }
-  .card-title {
-    font-family: var(--font-display);
-    font-size: 18px;
-    font-weight: normal;
-    margin-bottom: 1rem;
-    color: var(--ink);
-  }
-
-  /* ── BOOK HERO ── */
-  .book-hero {
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    padding: 1.75rem;
-    margin-bottom: 1.25rem;
-    border-left: 4px solid var(--accent);
-  }
-  .book-eyebrow {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 6px;
-  }
-  .book-title-display {
-    font-family: var(--font-display);
-    font-size: 26px;
-    font-weight: normal;
-    line-height: 1.3;
-    margin-bottom: 6px;
-  }
-  .book-meta {
-    font-size: 13px;
-    color: var(--ink-muted);
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  /* ── WEEK PILLS ── */
-  .week-tabs {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-bottom: 1.25rem;
-  }
-  .week-pill {
-    padding: 5px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    border: 1px solid var(--rule);
-    background: var(--surface);
-    color: var(--ink-soft);
-    cursor: pointer;
-    font-family: var(--font-body);
-  }
-  .week-pill.active {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
-  }
+  .card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; }
+  .card-title { font-family: var(--font-display); font-size: 18px; font-weight: normal; margin-bottom: 1rem; color: var(--ink); }
+  .book-hero { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 1.75rem; margin-bottom: 1.25rem; border-left: 4px solid var(--accent); }
+  .book-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .book-title-display { font-family: var(--font-display); font-size: 26px; font-weight: normal; line-height: 1.3; margin-bottom: 6px; }
+  .book-meta { font-size: 13px; color: var(--ink-muted); display: flex; gap: 1rem; flex-wrap: wrap; }
+  .week-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .week-pill { padding: 5px 14px; border-radius: 20px; font-size: 13px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink-soft); cursor: pointer; font-family: var(--font-body); }
+  .week-pill.active { background: var(--accent); color: white; border-color: var(--accent); }
   .week-pill:hover:not(.active) { background: var(--page); }
-
-  /* ── QUESTIONS ── */
-  .question-block {
-    margin-bottom: 1.25rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px solid var(--rule);
-  }
+  .question-block { margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--rule); }
   .question-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
   .q-label { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-mid); margin-bottom: 5px; }
   .q-text { font-family: var(--font-display); font-size: 16px; font-weight: normal; margin-bottom: 10px; line-height: 1.4; }
-
-  /* ── FORMS ── */
   label { font-size: 13px; color: var(--ink-soft); display: block; margin-bottom: 5px; margin-top: 12px; }
   label:first-child { margin-top: 0; }
-  input[type=text], input[type=password], input[type=date], textarea, select {
-    width: 100%;
-    padding: 9px 12px;
-    border: 1px solid var(--rule);
-    border-radius: 7px;
-    font-family: var(--font-body);
-    font-size: 14px;
-    background: var(--surface);
-    color: var(--ink);
-    outline: none;
-    transition: border-color .15s;
-  }
+  input[type=text], input[type=password], input[type=date], textarea, select { width: 100%; padding: 9px 12px; border: 1px solid var(--rule); border-radius: 7px; font-family: var(--font-body); font-size: 14px; background: var(--surface); color: var(--ink); outline: none; transition: border-color .15s; }
   input:focus, textarea:focus { border-color: var(--accent-mid); }
   textarea { min-height: 90px; resize: vertical; }
-
-  /* ── BUTTONS ── */
-  .btn {
-    padding: 9px 18px;
-    border-radius: 7px;
-    font-family: var(--font-body);
-    font-size: 14px;
-    cursor: pointer;
-    border: 1px solid var(--rule);
-    background: none;
-    color: var(--ink);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: background .12s;
-  }
+  .btn { padding: 9px 18px; border-radius: 7px; font-family: var(--font-body); font-size: 14px; cursor: pointer; border: 1px solid var(--rule); background: none; color: var(--ink); display: inline-flex; align-items: center; gap: 6px; transition: background .12s; }
   .btn:hover { background: var(--page); }
   .btn:disabled { opacity: .45; cursor: default; }
-  .btn-primary {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
-  }
+  .btn-primary { background: var(--accent); color: white; border-color: var(--accent); }
   .btn-primary:hover { background: #234820; }
   .btn-danger { color: var(--warn); border-color: #f5c9b3; }
   .btn-danger:hover { background: var(--warn-light); }
   .btn-sm { padding: 5px 11px; font-size: 12px; }
   .row-end { display: flex; justify-content: flex-end; gap: 8px; margin-top: 1rem; flex-wrap: wrap; }
   .row { display: flex; gap: 8px; align-items: flex-start; }
-
-  /* ── BADGES ── */
-  .badge {
-    display: inline-block;
-    font-size: 11px;
-    padding: 2px 9px;
-    border-radius: 12px;
-    font-weight: 500;
-  }
+  .badge { display: inline-block; font-size: 11px; padding: 2px 9px; border-radius: 12px; font-weight: 500; }
   .badge-green { background: var(--accent-light); color: var(--accent); }
   .badge-amber { background: #fef3e2; color: #7a4f00; }
   .badge-red { background: var(--warn-light); color: var(--warn); }
-  .badge-gray { background: #f0eee9; color: var(--ink-soft); }
-
-  /* ── READER ID ── */
-  .reader-id-bar {
-    background: var(--accent-light);
-    border: 1px solid #c3dbbf;
-    border-radius: 7px;
-    padding: 10px 14px;
-    font-size: 13px;
-    color: var(--accent);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 1.25rem;
-  }
+  .reader-id-bar { background: var(--accent-light); border: 1px solid #c3dbbf; border-radius: 7px; padding: 10px 14px; font-size: 13px; color: var(--accent); display: flex; align-items: center; gap: 8px; margin-bottom: 1.25rem; flex-wrap: wrap; }
   .reader-id-bar strong { font-family: monospace; letter-spacing: .04em; }
-
-  /* ── SYNTHESIS ── */
-  .synth-section { margin-bottom: 1.5rem; }
-  .synth-heading {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    margin-bottom: 10px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--rule);
-  }
-  .synth-item {
-    padding: .875rem 1rem;
-    background: var(--page);
-    border-radius: 7px;
-    margin-bottom: 8px;
-    border-left: 3px solid var(--accent);
-  }
-  .synth-item-q { font-size: 12px; color: var(--ink-muted); margin-bottom: 4px; }
-  .synth-item-text { font-size: 14px; line-height: 1.6; }
-  .theme-item {
-    padding: .875rem 1rem;
-    background: var(--page);
-    border-radius: 7px;
-    margin-bottom: 8px;
-  }
-  .theme-name { font-family: var(--font-display); font-size: 15px; margin-bottom: 4px; }
-  .theme-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
-  .score-item { margin-bottom: 12px; }
-  .score-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }
-  .score-track { height: 6px; background: var(--rule); border-radius: 4px; overflow: hidden; }
-  .score-fill { height: 100%; background: var(--accent); transition: width .6s ease; }
-  .talking-pt {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--rule);
-  }
-  .talking-pt:last-child { border-bottom: none; }
-  .tp-num {
-    width: 22px; height: 22px; border-radius: 50%;
-    background: var(--accent-light); color: var(--accent);
-    font-size: 11px; font-weight: 600;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; margin-top: 2px;
-  }
-  .tp-text { font-size: 14px; line-height: 1.5; }
-
-  /* ── ADMIN TABLE ── */
-  .resp-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .resp-table th { text-align: left; padding: 8px 10px; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-muted); border-bottom: 1px solid var(--rule); }
-  .resp-table td { padding: 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
-  .resp-table tr:last-child td { border-bottom: none; }
-  .resp-table tr:hover td { background: var(--page); }
-
-  /* ── STATES ── */
+  .export-box { background: var(--page); border: 1px solid var(--rule); border-radius: 7px; padding: 1rem; font-family: monospace; font-size: 12px; line-height: 1.6; white-space: pre-wrap; word-break: break-word; max-height: 400px; overflow-y: auto; margin-bottom: 1rem; color: var(--ink-soft); }
+  .resp-block { padding: 8px 12px; background: var(--page); border-radius: 6px; margin-bottom: 5px; }
+  .resp-who { font-size: 11px; color: var(--ink-muted); margin-bottom: 2px; font-family: monospace; }
+  .resp-text { font-size: 13px; line-height: 1.5; }
   .empty-state { text-align: center; padding: 2.5rem 1rem; color: var(--ink-muted); font-size: 14px; }
-  .empty-state svg { display: block; margin: 0 auto 12px; opacity: .3; }
   .loading { color: var(--ink-muted); font-size: 14px; display: flex; align-items: center; gap: 8px; padding: .5rem 0; }
   .spinner { width: 16px; height: 16px; border: 2px solid var(--rule); border-top-color: var(--accent); border-radius: 50%; animation: spin .7s linear infinite; flex-shrink: 0; }
   @keyframes spin { to { transform: rotate(360deg); } }
   .success-msg { background: var(--accent-light); border: 1px solid #c3dbbf; border-radius: 7px; padding: 10px 14px; font-size: 14px; color: var(--accent); margin-bottom: 1rem; }
   .error-msg { background: var(--warn-light); border: 1px solid #f5c9b3; border-radius: 7px; padding: 10px 14px; font-size: 14px; color: var(--warn); margin-bottom: 1rem; }
-
-  /* ── TOAST ── */
-  #toast {
-    position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(80px);
-    background: var(--ink); color: white; padding: 10px 20px; border-radius: 20px;
-    font-size: 14px; transition: transform .25s ease; z-index: 999; white-space: nowrap;
-  }
+  .info-box { background: #f0f4ff; border: 1px solid #c7d4f5; border-radius: 7px; padding: 1rem 1.25rem; font-size: 14px; color: #2a3f8f; margin-bottom: 1rem; line-height: 1.6; }
+  .info-box strong { font-weight: 600; }
+  #toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--ink); color: white; padding: 10px 20px; border-radius: 20px; font-size: 14px; transition: transform .25s ease; z-index: 999; white-space: nowrap; }
   #toast.show { transform: translateX(-50%) translateY(0); }
-
-  /* ── DIVIDER ── */
   .divider { border: none; border-top: 1px solid var(--rule); margin: 1.25rem 0; }
-
-  /* ── VIEWS ── */
   .view { display: none; }
   .view.active { display: block; }
-
-  /* ── ADMIN GRID ── */
   .admin-grid { display: grid; grid-template-columns: 220px 1fr; gap: 1.25rem; align-items: start; }
   .admin-nav { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; }
-  .admin-nav-item {
-    display: block; width: 100%; text-align: left;
-    padding: 11px 16px; font-size: 14px; font-family: var(--font-body);
-    border: none; background: none; color: var(--ink-soft); cursor: pointer;
-    border-bottom: 1px solid var(--rule);
-  }
+  .admin-nav-item { display: block; width: 100%; text-align: left; padding: 11px 16px; font-size: 14px; font-family: var(--font-body); border: none; background: none; color: var(--ink-soft); cursor: pointer; border-bottom: 1px solid var(--rule); }
   .admin-nav-item:last-child { border-bottom: none; }
   .admin-nav-item.active { background: var(--accent-light); color: var(--accent); font-weight: 500; }
   .admin-nav-item:hover:not(.active) { background: var(--page); }
-
   .admin-panel { display: none; }
   .admin-panel.active { display: block; }
-
-  /* ── MODAL ── */
-  .modal-backdrop {
-    position: fixed; inset: 0; background: rgba(0,0,0,.4);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 100; padding: 1rem;
-  }
-  .modal {
-    background: var(--surface); border-radius: var(--radius);
-    padding: 1.75rem; max-width: 480px; width: 100%;
-    border: 1px solid var(--rule);
-  }
+  .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.4); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 1rem; }
+  .modal { background: var(--surface); border-radius: var(--radius); padding: 1.75rem; max-width: 480px; width: 100%; border: 1px solid var(--rule); }
   .modal-title { font-family: var(--font-display); font-size: 20px; font-weight: normal; margin-bottom: 1rem; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 600px) {
-    .admin-grid { grid-template-columns: 1fr; }
-    .admin-nav { display: flex; overflow-x: auto; }
-    .admin-nav-item { border-bottom: none; border-right: 1px solid var(--rule); white-space: nowrap; }
-    .admin-nav-item:last-child { border-right: none; }
-    .book-title-display { font-size: 22px; }
-  }
+  @media (max-width: 600px) { .admin-grid { grid-template-columns: 1fr; } .admin-nav { display: flex; overflow-x: auto; } .admin-nav-item { border-bottom: none; border-right: 1px solid var(--rule); white-space: nowrap; } .admin-nav-item:last-child { border-right: none; } .book-title-display { font-size: 22px; } .reader-id-bar { font-size: 12px; } }
 </style>
 </head>
 <body>
 
 <div id="toast"></div>
 
-<!-- ═══════════════════════════════════════════════
-     MODAL: Admin login
-════════════════════════════════════════════════ -->
 <div id="admin-login-modal" class="modal-backdrop" style="display:none">
   <div class="modal">
     <div class="modal-title">Admin access</div>
@@ -367,52 +114,39 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════
-     HEADER
-════════════════════════════════════════════════ -->
 <header class="site-header">
   <div class="site-logo">Book<span>Club</span></div>
   <button class="header-btn" onclick="openAdminLogin()">Admin</button>
 </header>
 
-<!-- ═══════════════════════════════════════════════
-     VIEW: MEMBER
-════════════════════════════════════════════════ -->
+<!-- MEMBER VIEW -->
 <div id="view-member" class="view active">
   <div class="container">
-
     <div id="member-loading" class="loading" style="padding:2rem 0"><div class="spinner"></div> Loading your book club...</div>
     <div id="member-no-book" class="empty-state" style="display:none">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.966 8.966 0 00-6 2.292m0-14.25v14.25"/></svg>
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:block;margin:0 auto 12px;opacity:.3"><path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.966 8.966 0 00-6 2.292m0-14.25v14.25"/></svg>
       No book is currently active. Check back soon!
     </div>
-
     <div id="member-content" style="display:none">
       <div class="reader-id-bar">
-        📖 Your anonymous reader ID: <strong id="display-reader-id"></strong>
-        <span style="color:var(--ink-muted);font-size:12px;margin-left:auto">Keep this private — it's how your responses are saved</span>
+        📖 Your reader ID: <strong id="display-reader-id"></strong>
+        <span style="color:var(--accent-mid);font-size:12px;margin-left:auto">Anonymous — your name is never stored</span>
       </div>
-
       <div class="book-hero">
         <div class="book-eyebrow">Currently reading</div>
         <div class="book-title-display" id="member-book-title">—</div>
         <div class="book-meta">
-          <span id="member-book-dates">—</span>
+          <span id="member-book-dates"></span>
           <span id="member-book-desc"></span>
         </div>
       </div>
-
       <div class="week-tabs" id="member-week-tabs"></div>
-
       <div id="member-week-content"></div>
     </div>
-
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════
-     VIEW: ADMIN
-════════════════════════════════════════════════ -->
+<!-- ADMIN VIEW -->
 <div id="view-admin" class="view">
   <div class="container-wide">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.5rem">
@@ -420,17 +154,15 @@
       <span class="badge badge-green">Logged in</span>
       <button class="btn btn-sm" style="margin-left:auto" onclick="adminLogout()">Log out</button>
     </div>
-
     <div class="admin-grid">
       <nav class="admin-nav">
         <button class="admin-nav-item active" onclick="showAdminPanel('book')">📚 Book setup</button>
         <button class="admin-nav-item" onclick="showAdminPanel('weeks')">📅 Weekly questions</button>
         <button class="admin-nav-item" onclick="showAdminPanel('responses')">💬 Responses</button>
-        <button class="admin-nav-item" onclick="showAdminPanel('synthesis')">✨ Synthesis</button>
+        <button class="admin-nav-item" onclick="showAdminPanel('export')">✂️ Export for Claude</button>
         <button class="admin-nav-item" onclick="showAdminPanel('moderation')">🛡 Moderation</button>
         <button class="admin-nav-item" onclick="showAdminPanel('settings')">⚙️ Settings</button>
       </nav>
-
       <div>
 
         <!-- BOOK SETUP -->
@@ -439,10 +171,8 @@
             <div class="card-title">Current book</div>
             <label>Book title</label>
             <input type="text" id="admin-book-title" placeholder="e.g. Station Eleven by Emily St. John Mandel">
-            <label>Short description (optional)</label>
+            <label>Short description (shown to members)</label>
             <input type="text" id="admin-book-desc" placeholder="e.g. A post-pandemic novel about art and survival">
-            <label>Reading guide / context (optional — helps AI generate better questions)</label>
-            <textarea id="admin-book-guide" placeholder="Paste a reading guide, chapter summaries, or notes here..."></textarea>
             <label>Start date</label>
             <input type="date" id="admin-book-start">
             <label>End date</label>
@@ -456,16 +186,16 @@
         <!-- WEEKLY QUESTIONS -->
         <div id="panel-weeks" class="admin-panel">
           <div class="card">
-            <div class="card-title">Weekly questions</div>
-            <div id="weeks-list"></div>
-            <hr class="divider">
-            <div style="font-size:14px;font-weight:500;margin-bottom:10px">Add a week</div>
+            <div class="card-title">Published weeks</div>
+            <div id="weeks-list"><div class="empty-state">No weeks published yet</div></div>
+          </div>
+          <div class="card">
+            <div class="card-title">Add a new week</div>
             <label>Week label</label>
             <input type="text" id="new-week-label" placeholder="e.g. Week 1 — Chapters 1–5">
             <label>Questions (one per line)</label>
-            <textarea id="new-week-questions" style="min-height:120px" placeholder="What struck you most about the opening?&#10;How did the setting affect the mood?&#10;Which character felt most real to you?"></textarea>
+            <textarea id="new-week-questions" style="min-height:140px" placeholder="What struck you most about the opening?&#10;How did the setting shape the mood?&#10;Which character felt most real, and why?"></textarea>
             <div class="row-end">
-              <button class="btn btn-sm" id="gen-weeks-btn" onclick="generateWeekQs()">✨ Generate with AI</button>
               <button class="btn btn-primary" onclick="addWeek()">Publish week</button>
             </div>
           </div>
@@ -475,66 +205,54 @@
         <div id="panel-responses" class="admin-panel">
           <div class="card">
             <div class="card-title">All responses</div>
-            <div id="responses-week-tabs" class="week-tabs"></div>
-            <div id="responses-table-wrap">
-              <div class="empty-state">Select a week above to view responses</div>
-            </div>
+            <div class="week-tabs" id="responses-week-tabs"></div>
+            <div id="responses-content"><div class="empty-state">Select a week above</div></div>
           </div>
         </div>
 
-        <!-- SYNTHESIS -->
-        <div id="panel-synthesis" class="admin-panel">
+        <!-- EXPORT FOR CLAUDE -->
+        <div id="panel-export" class="admin-panel">
           <div class="card">
-            <div class="card-title">AI synthesis</div>
-            <p style="font-size:14px;color:var(--ink-soft);margin-bottom:1rem">Select a week to synthesise. The AI will read all responses and produce a full harmonisation — per-question summary, cross-cutting themes, consensus scores, and a moderator briefing for your call.</p>
-            <div id="synth-week-tabs" class="week-tabs"></div>
-            <div id="synth-output"></div>
-            <div class="row-end">
-              <button class="btn btn-primary" id="run-synth-btn" onclick="runSynthesis()" style="display:none">✨ Harmonise all views</button>
+            <div class="card-title">Export for Claude</div>
+            <div class="info-box">
+              <strong>How this works:</strong> Select a week, click Export, then copy the text and paste it into your Claude.ai chat. Claude will synthesise all the responses, identify themes, flag disagreements, and give you a moderator briefing for your call — all for free using your Claude subscription.
             </div>
+            <div class="week-tabs" id="export-week-tabs"></div>
+            <div id="export-output"></div>
           </div>
         </div>
 
         <!-- MODERATION -->
         <div id="panel-moderation" class="admin-panel">
           <div class="card">
-            <div class="card-title">Moderation</div>
-            <p style="font-size:14px;color:var(--ink-soft);margin-bottom:1rem">Reader IDs flagged by AI or banned manually are listed here. Banned readers cannot submit new responses.</p>
-            <div id="banned-list"></div>
+            <div class="card-title">Banned readers</div>
+            <p style="font-size:14px;color:var(--ink-soft);margin-bottom:1rem">Banned reader IDs cannot submit responses. You can ban anyone from the Responses panel.</p>
+            <div id="banned-list"><div class="empty-state">No banned readers</div></div>
             <hr class="divider">
             <div style="font-size:14px;font-weight:500;margin-bottom:8px">Ban a reader ID manually</div>
             <div class="row">
               <input type="text" id="ban-id-input" placeholder="reader-xxxx" style="flex:1">
-              <button class="btn btn-danger btn-sm" onclick="banReader()">Ban</button>
+              <button class="btn btn-danger btn-sm" onclick="banReaderManual()">Ban</button>
             </div>
-          </div>
-          <div class="card">
-            <div class="card-title">AI content moderation</div>
-            <p style="font-size:14px;color:var(--ink-soft);margin-bottom:1rem">Run AI moderation across all recent responses. Flagged submissions will be highlighted for your review.</p>
-            <button class="btn" onclick="runModeration()">🛡 Scan responses</button>
-            <div id="moderation-output" style="margin-top:1rem"></div>
           </div>
         </div>
 
         <!-- SETTINGS -->
         <div id="panel-settings" class="admin-panel">
           <div class="card">
-            <div class="card-title">Settings</div>
-            <label>Admin passcode (current)</label>
+            <div class="card-title">Change passcode</div>
+            <label>Current passcode</label>
             <input type="password" id="current-passcode" placeholder="Current passcode">
             <label>New passcode</label>
             <input type="password" id="new-passcode" placeholder="New passcode">
-            <label>Anthropic API key</label>
-            <input type="password" id="api-key-input" placeholder="sk-ant-...">
-            <p style="font-size:12px;color:var(--ink-muted);margin-top:5px">Stored in your browser only. Used for AI question generation and synthesis.</p>
             <div class="row-end">
-              <button class="btn btn-primary" onclick="saveSettings()">Save settings</button>
+              <button class="btn btn-primary" onclick="savePasscode()">Update passcode</button>
             </div>
           </div>
           <div class="card">
-            <div class="card-title">Archive &amp; new book</div>
-            <p style="font-size:14px;color:var(--ink-soft);margin-bottom:1rem">When you finish a book, archive it and start fresh. Archived books and their responses are preserved in Supabase.</p>
-            <button class="btn btn-danger" onclick="archiveBook()">Archive current book &amp; start new</button>
+            <div class="card-title">Archive &amp; start new book</div>
+            <p style="font-size:14px;color:var(--ink-soft);margin-bottom:1rem">When you finish a book, archive it and start fresh. All responses are preserved in the database.</p>
+            <button class="btn btn-danger" onclick="archiveBook()">Archive current book</button>
           </div>
         </div>
 
@@ -544,48 +262,43 @@
 </div>
 
 <script>
-// ═══════════════════════════════════════════════
-// ⚙️  CONFIGURATION — fill these in
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════
+// CONFIG — fill these in
+// ═══════════════════════════════════════
 const CONFIG = {
-   supabaseUrl:  'https://xfldcgflaqbqbgokfdnq.supabase.co',
-   supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhmbGRjZ2ZsYXFicWJnb2tmZG5xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0NTE3MDYsImV4cCI6MjA5NzAyNzcwNn0.7T81g_ChX5BD_SwTj595iF9hEX7iKfEsnN4LxpeToko',
-   adminPass:    'newapps2026!',
+  supabaseUrl: 'YOUR_SUPABASE_URL',
+  supabaseKey: 'YOUR_SUPABASE_ANON_KEY',
+  adminPass:   'bookclub2024',
 };
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════
 
-let sb, bookData = null, weeksData = [], selectedSynthWeek = null, selectedRespWeek = null, bannedIds = [];
-let apiKey = localStorage.getItem('bc_api_key') || '';
+let sb, bookData = null, weeksData = [], selectedExportWeek = null, selectedRespWeek = null;
 
 function initSupabase() {
-  try {
-    sb = supabase.createClient(CONFIG.supabaseUrl, CONFIG.supabaseKey);
-    return true;
-  } catch(e) { return false; }
+  try { sb = supabase.createClient(CONFIG.supabaseUrl, CONFIG.supabaseKey); return true; }
+  catch(e) { return false; }
 }
 
-// ── READER ID ──
 function getReaderId() {
   let id = localStorage.getItem('bc_reader_id');
   if (!id) { id = 'reader-' + Math.random().toString(36).slice(2,8); localStorage.setItem('bc_reader_id', id); }
   return id;
 }
 
-// ── TOAST ──
 function toast(msg, dur=2800) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), dur);
 }
 
-// ── ADMIN AUTH ──
-function openAdminLogin() { document.getElementById('admin-login-modal').style.display = 'flex'; document.getElementById('admin-passcode-input').focus(); }
-function closeAdminLogin() { document.getElementById('admin-login-modal').style.display = 'none'; document.getElementById('passcode-error').style.display = 'none'; }
+// ── AUTH ──
+function openAdminLogin() { document.getElementById('admin-login-modal').style.display='flex'; setTimeout(()=>document.getElementById('admin-passcode-input').focus(),50); }
+function closeAdminLogin() { document.getElementById('admin-login-modal').style.display='none'; document.getElementById('passcode-error').style.display='none'; document.getElementById('admin-passcode-input').value=''; }
 function checkPasscode() {
   const v = document.getElementById('admin-passcode-input').value;
   const stored = localStorage.getItem('bc_admin_pass') || CONFIG.adminPass;
   if (v === stored) { closeAdminLogin(); enterAdmin(); }
-  else { document.getElementById('passcode-error').style.display = 'block'; }
+  else { document.getElementById('passcode-error').style.display='block'; }
 }
 function enterAdmin() {
   document.getElementById('view-member').classList.remove('active');
@@ -598,49 +311,45 @@ function adminLogout() {
 }
 
 function showAdminPanel(name) {
-  document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.admin-nav-item').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.admin-nav-item').forEach(b=>b.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
   event.target.classList.add('active');
-  if (name === 'responses') renderRespWeekTabs();
-  if (name === 'synthesis') renderSynthWeekTabs();
-  if (name === 'moderation') loadBanned();
+  if (name==='responses') renderRespWeekTabs();
+  if (name==='export') renderExportWeekTabs();
+  if (name==='moderation') loadBanned();
 }
 
-// ── LOAD ADMIN DATA ──
+// ── ADMIN DATA ──
 async function loadAdminData() {
-  if (!sb) { toast('Supabase not configured — see setup guide'); return; }
-  const { data: book } = await sb.from('books').select('*').eq('active', true).single();
+  if (!sb) { toast('Supabase not configured'); return; }
+  const { data: book } = await sb.from('books').select('*').eq('active',true).single();
   if (book) {
     bookData = book;
-    document.getElementById('admin-book-title').value = book.title || '';
-    document.getElementById('admin-book-desc').value = book.description || '';
-    document.getElementById('admin-book-guide').value = book.guide || '';
-    document.getElementById('admin-book-start').value = book.start_date || '';
-    document.getElementById('admin-book-end').value = book.end_date || '';
+    document.getElementById('admin-book-title').value = book.title||'';
+    document.getElementById('admin-book-desc').value = book.description||'';
+    document.getElementById('admin-book-start').value = book.start_date||'';
+    document.getElementById('admin-book-end').value = book.end_date||'';
   }
   const { data: weeks } = await sb.from('weeks').select('*').order('created_at');
-  weeksData = weeks || [];
+  weeksData = weeks||[];
   renderWeeksList();
-  renderRespWeekTabs();
-  renderSynthWeekTabs();
-  document.getElementById('api-key-input').value = apiKey;
 }
 
-// ── SAVE BOOK ──
+// ── BOOK ──
 async function saveBook() {
   if (!sb) return;
   const payload = {
     title: document.getElementById('admin-book-title').value,
     description: document.getElementById('admin-book-desc').value,
-    guide: document.getElementById('admin-book-guide').value,
     start_date: document.getElementById('admin-book-start').value,
     end_date: document.getElementById('admin-book-end').value,
     active: true
   };
+  if (!payload.title) { toast('Please add a book title'); return; }
   if (bookData) {
-    await sb.from('books').update(payload).eq('id', bookData.id);
-    bookData = { ...bookData, ...payload };
+    await sb.from('books').update(payload).eq('id',bookData.id);
+    bookData = {...bookData,...payload};
   } else {
     const { data } = await sb.from('books').insert(payload).select().single();
     bookData = data;
@@ -652,12 +361,12 @@ async function saveBook() {
 // ── WEEKS ──
 function renderWeeksList() {
   const el = document.getElementById('weeks-list');
-  if (!weeksData.length) { el.innerHTML = '<div class="empty-state">No weeks published yet</div>'; return; }
-  el.innerHTML = weeksData.map((w,i) => `
-    <div style="padding:10px;background:var(--page);border-radius:7px;margin-bottom:8px;display:flex;align-items:flex-start;gap:10px">
+  if (!weeksData.length) { el.innerHTML='<div class="empty-state">No weeks published yet</div>'; return; }
+  el.innerHTML = weeksData.map(w=>`
+    <div style="padding:10px 12px;background:var(--page);border-radius:7px;margin-bottom:8px;display:flex;align-items:center;gap:10px">
       <div style="flex:1">
-        <div style="font-weight:500;font-size:14px;margin-bottom:4px">${w.label}</div>
-        <div style="font-size:12px;color:var(--ink-muted)">${(w.questions||[]).length} question${(w.questions||[]).length!==1?'s':''}</div>
+        <div style="font-weight:500;font-size:14px">${w.label}</div>
+        <div style="font-size:12px;color:var(--ink-muted);margin-top:2px">${(w.questions||[]).length} question${(w.questions||[]).length!==1?'s':''}</div>
       </div>
       <button class="btn btn-sm btn-danger" onclick="deleteWeek('${w.id}')">Remove</button>
     </div>`).join('');
@@ -667,161 +376,112 @@ async function addWeek() {
   if (!sb) return;
   const label = document.getElementById('new-week-label').value.trim();
   const qRaw = document.getElementById('new-week-questions').value.trim();
-  if (!label || !qRaw) { toast('Add a label and at least one question'); return; }
+  if (!label) { toast('Please add a week label'); return; }
+  if (!qRaw) { toast('Please add at least one question'); return; }
+  if (!bookData) { toast('Save a book first'); return; }
   const questions = qRaw.split('\n').map(q=>q.trim()).filter(Boolean);
-  const bookId = bookData?.id;
-  if (!bookId) { toast('Save a book first'); return; }
-  const { data } = await sb.from('weeks').insert({ book_id: bookId, label, questions }).select().single();
+  const { data } = await sb.from('weeks').insert({ book_id:bookData.id, label, questions }).select().single();
   weeksData.push(data);
-  document.getElementById('new-week-label').value = '';
-  document.getElementById('new-week-questions').value = '';
+  document.getElementById('new-week-label').value='';
+  document.getElementById('new-week-questions').value='';
   renderWeeksList();
   toast('Week published ✓');
+  loadMemberView();
 }
 
 async function deleteWeek(id) {
   if (!confirm('Remove this week and all its responses?')) return;
-  await sb.from('responses').delete().eq('week_id', id);
-  await sb.from('weeks').delete().eq('id', id);
+  await sb.from('responses').delete().eq('week_id',id);
+  await sb.from('weeks').delete().eq('id',id);
   weeksData = weeksData.filter(w=>w.id!==id);
   renderWeeksList();
   toast('Week removed');
 }
 
-async function generateWeekQs() {
-  if (!apiKey) { toast('Add your Anthropic API key in Settings first'); return; }
-  if (!bookData?.title) { toast('Save a book first'); return; }
-  const btn = document.getElementById('gen-weeks-btn');
-  btn.disabled = true; btn.textContent = 'Generating...';
-  const weekNum = weeksData.length + 1;
-  const guide = bookData.guide ? 'Reading guide context: ' + bookData.guide.substring(0,600) : '';
-  const prompt = `Generate 4 discussion questions for Week ${weekNum} of a book club reading "${bookData.title}". ${guide} Questions should build on earlier weeks. Return ONLY a JSON array of strings. No preamble, no markdown.`;
-  try {
-    const res = await callClaude(prompt, 600);
-    const qs = JSON.parse(res.replace(/```json|```/g,'').trim());
-    const label = document.getElementById('new-week-label').value || `Week ${weekNum}`;
-    document.getElementById('new-week-label').value = label;
-    document.getElementById('new-week-questions').value = qs.join('\n');
-  } catch(e) { toast('Could not generate — check API key in Settings'); }
-  btn.disabled = false; btn.textContent = '✨ Generate with AI';
-}
-
 // ── RESPONSES ──
 function renderRespWeekTabs() {
   const el = document.getElementById('responses-week-tabs');
-  if (!weeksData.length) { el.innerHTML = ''; return; }
-  el.innerHTML = weeksData.map(w => `
+  if (!weeksData.length) { el.innerHTML='<p style="font-size:13px;color:var(--ink-muted)">No weeks published yet</p>'; return; }
+  el.innerHTML = weeksData.map(w=>`
     <button class="week-pill ${selectedRespWeek===w.id?'active':''}" onclick="loadResponses('${w.id}')">${w.label}</button>`).join('');
 }
 
 async function loadResponses(weekId) {
   selectedRespWeek = weekId;
   renderRespWeekTabs();
-  const wrap = document.getElementById('responses-table-wrap');
-  wrap.innerHTML = '<div class="loading"><div class="spinner"></div> Loading responses...</div>';
+  const el = document.getElementById('responses-content');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div> Loading...</div>';
   const week = weeksData.find(w=>w.id===weekId);
-  const { data: resps } = await sb.from('responses').select('*').eq('week_id', weekId).order('created_at');
-  if (!resps?.length) { wrap.innerHTML = '<div class="empty-state">No responses yet for this week</div>'; return; }
+  const { data: resps } = await sb.from('responses').select('*').eq('week_id',weekId).order('created_at');
+  if (!resps?.length) { el.innerHTML='<div class="empty-state">No responses yet for this week</div>'; return; }
   const grouped = {};
-  resps.forEach(r => { if(!grouped[r.reader_id]) grouped[r.reader_id]=[]; grouped[r.reader_id].push(r); });
-  wrap.innerHTML = `
-    <p style="font-size:13px;color:var(--ink-muted);margin-bottom:12px">${Object.keys(grouped).length} reader${Object.keys(grouped).length!==1?'s':''} responded</p>
-    ${(week.questions||[]).map((q,qi) => `
+  resps.forEach(r=>{ if(!grouped[r.reader_id]) grouped[r.reader_id]={}; grouped[r.reader_id][r.question_index]=r.answer; });
+  const readerCount = Object.keys(grouped).length;
+  el.innerHTML = `<p style="font-size:13px;color:var(--ink-muted);margin-bottom:1rem">${readerCount} reader${readerCount!==1?'s':''} responded</p>` +
+    (week.questions||[]).map((q,qi)=>`
       <div style="margin-bottom:1.25rem">
         <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-muted);margin-bottom:8px">Q${qi+1}: ${q}</div>
-        ${Object.entries(grouped).map(([rid,rs]) => {
-          const r = rs.find(x=>x.question_index===qi);
-          return r ? `<div style="padding:8px 12px;background:var(--page);border-radius:6px;margin-bottom:5px;display:flex;gap:10px;align-items:flex-start">
-            <span style="font-family:monospace;font-size:11px;color:var(--ink-muted);flex-shrink:0;margin-top:2px">${rid}</span>
-            <span style="font-size:13px;line-height:1.5">${r.answer}</span>
-            <button class="btn btn-sm btn-danger" style="flex-shrink:0;padding:2px 7px" onclick="banReader('${rid}')">Ban</button>
-          </div>` : '';
-        }).join('')}
-      </div>`).join('')}`;
+        ${Object.entries(grouped).map(([rid,ans])=> ans[qi] ? `
+          <div style="padding:8px 12px;background:var(--page);border-radius:6px;margin-bottom:5px;display:flex;gap:10px;align-items:flex-start">
+            <span style="font-family:monospace;font-size:11px;color:var(--ink-muted);flex-shrink:0;padding-top:2px">${rid}</span>
+            <span style="font-size:13px;line-height:1.5;flex:1">${ans[qi]}</span>
+            <button class="btn btn-sm btn-danger" style="flex-shrink:0;padding:3px 8px" onclick="banReader('${rid}')">Ban</button>
+          </div>` : '').join('')}
+      </div>`).join('');
 }
 
-// ── SYNTHESIS ──
-function renderSynthWeekTabs() {
-  const el = document.getElementById('synth-week-tabs');
-  if (!weeksData.length) { el.innerHTML = '<p style="font-size:13px;color:var(--ink-muted)">Publish some weeks first</p>'; return; }
-  el.innerHTML = weeksData.map(w => `
-    <button class="week-pill ${selectedSynthWeek===w.id?'active':''}" onclick="selectSynthWeek('${w.id}')">${w.label}</button>`).join('');
+// ── EXPORT FOR CLAUDE ──
+function renderExportWeekTabs() {
+  const el = document.getElementById('export-week-tabs');
+  if (!weeksData.length) { el.innerHTML='<p style="font-size:13px;color:var(--ink-muted)">No weeks published yet</p>'; return; }
+  el.innerHTML = weeksData.map(w=>`
+    <button class="week-pill ${selectedExportWeek===w.id?'active':''}" onclick="exportWeek('${w.id}')">${w.label}</button>`).join('');
 }
 
-function selectSynthWeek(id) {
-  selectedSynthWeek = id;
-  renderSynthWeekTabs();
-  document.getElementById('synth-output').innerHTML = '';
-  document.getElementById('run-synth-btn').style.display = 'inline-flex';
-}
-
-async function runSynthesis() {
-  if (!apiKey) { toast('Add your Anthropic API key in Settings first'); return; }
-  if (!selectedSynthWeek) return;
-  const btn = document.getElementById('run-synth-btn');
-  btn.disabled = true; btn.textContent = 'Harmonising...';
-  const out = document.getElementById('synth-output');
-  out.innerHTML = '<div class="loading"><div class="spinner"></div> Reading all responses...</div>';
-  const week = weeksData.find(w=>w.id===selectedSynthWeek);
-  const { data: resps } = await sb.from('responses').select('*').eq('week_id', selectedSynthWeek);
-  if (!resps?.length) { out.innerHTML = '<div class="empty-state">No responses yet for this week</div>'; btn.disabled=false; btn.textContent='✨ Harmonise all views'; return; }
+async function exportWeek(weekId) {
+  selectedExportWeek = weekId;
+  renderExportWeekTabs();
+  const el = document.getElementById('export-output');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div> Gathering responses...</div>';
+  const week = weeksData.find(w=>w.id===weekId);
+  const { data: resps } = await sb.from('responses').select('*').eq('week_id',weekId).order('created_at');
+  if (!resps?.length) { el.innerHTML='<div class="empty-state">No responses yet for this week</div>'; return; }
   const grouped = {};
-  resps.forEach(r => { if(!grouped[r.reader_id]) grouped[r.reader_id]={}; grouped[r.reader_id][r.question_index]=r.answer; });
-  const allText = (week.questions||[]).map((q,i)=>{
-    const answers = Object.entries(grouped).map(([rid,ans])=>`  ${rid}: ${ans[i]||'(no answer)'}`).join('\n');
-    return `Q${i+1}: ${q}\nAnswers:\n${answers}`;
-  }).join('\n\n');
-  const prompt = `You are synthesising book club responses for "${bookData?.title||'the book'}", ${week.label}.
-
-${allText}
-
-Return ONLY valid JSON with keys:
-- "perQuestion": [{question, synthesis}] — one paragraph per question summarising the range of views
-- "themes": [{title, description}] — 3 cross-cutting themes across all questions
-- "scores": [{topic, consensus, controversy}] — integers summing to 100, for each theme
-- "brief": [string] — 4 moderator talking points for the live call, each one actionable sentence
-
-No preamble. No markdown. Valid JSON only.`;
-  try {
-    const raw = await callClaude(prompt, 2000);
-    const data = JSON.parse(raw.replace(/```json|```/g,'').trim());
-    out.innerHTML = renderSynthHTML(data);
-    await sb.from('synthesis').upsert({ week_id: selectedSynthWeek, book_id: bookData?.id, result: data });
-    toast('Synthesis saved ✓');
-  } catch(e) { out.innerHTML = '<div class="error-msg">Could not synthesise. Check API key and try again.</div>'; }
-  btn.disabled = false; btn.textContent = '✨ Harmonise all views';
+  resps.forEach(r=>{ if(!grouped[r.reader_id]) grouped[r.reader_id]={}; grouped[r.reader_id][r.question_index]=r.answer; });
+  const readerCount = Object.keys(grouped).length;
+  let text = `BOOK CLUB SYNTHESIS REQUEST\n`;
+  text += `Book: ${bookData?.title||'Unknown'}\n`;
+  text += `Week: ${week.label}\n`;
+  text += `Responses from ${readerCount} anonymous reader${readerCount!==1?'s':''}\n`;
+  text += `${'─'.repeat(50)}\n\n`;
+  (week.questions||[]).forEach((q,qi)=>{
+    text += `QUESTION ${qi+1}: ${q}\n\n`;
+    Object.entries(grouped).forEach(([rid,ans])=>{
+      if (ans[qi]) text += `• ${ans[qi]}\n\n`;
+    });
+    text += `${'─'.repeat(50)}\n\n`;
+  });
+  text += `Please synthesise these responses. For each question provide a paragraph summarising the range of views, agreements, and interesting tensions. Then identify 3 cross-cutting themes across all questions. Score each theme for consensus vs controversy (out of 100). Finally give me 4 moderator talking points for our live online call.`;
+  el.innerHTML = `
+    <p style="font-size:13px;color:var(--ink-soft);margin-bottom:10px">${readerCount} reader${readerCount!==1?'s':''} · ${resps.length} response${resps.length!==1?'s':''} · ready to paste into Claude</p>
+    <div class="export-box" id="export-text">${text}</div>
+    <div class="row-end">
+      <button class="btn btn-primary" onclick="copyExport()">Copy to clipboard</button>
+    </div>`;
 }
 
-function renderSynthHTML(d) {
-  return `
-    <div class="synth-section">
-      <div class="synth-heading">Per-question synthesis</div>
-      ${(d.perQuestion||[]).map(r=>`<div class="synth-item"><div class="synth-item-q">${r.question}</div><div class="synth-item-text">${r.synthesis}</div></div>`).join('')}
-    </div>
-    <div class="synth-section">
-      <div class="synth-heading">Cross-cutting themes</div>
-      ${(d.themes||[]).map(t=>`<div class="theme-item"><div class="theme-name">${t.title}</div><div class="theme-desc">${t.description}</div></div>`).join('')}
-    </div>
-    <div class="synth-section">
-      <div class="synth-heading">Consensus vs controversy</div>
-      ${(d.scores||[]).map(s=>`<div class="score-item">
-        <div class="score-label"><span>${s.topic}</span><span style="color:var(--ink-muted)">${Math.round(s.consensus)}% consensus</span></div>
-        <div class="score-track"><div class="score-fill" style="width:${Math.round(s.consensus)}%"></div></div>
-      </div>`).join('')}
-    </div>
-    <div class="synth-section">
-      <div class="synth-heading">Moderator briefing</div>
-      <div>${(d.brief||[]).map((b,i)=>`<div class="talking-pt"><div class="tp-num">${i+1}</div><div class="tp-text">${b}</div></div>`).join('')}</div>
-    </div>`;
+function copyExport() {
+  const text = document.getElementById('export-text').textContent;
+  navigator.clipboard.writeText(text).then(()=>toast('Copied! Now paste into Claude.ai ✓'));
 }
 
 // ── MODERATION ──
 async function loadBanned() {
-  const { data } = await sb.from('banned').select('*').order('created_at', {ascending:false});
-  bannedIds = (data||[]).map(r=>r.reader_id);
+  const { data } = await sb.from('banned').select('*').order('created_at',{ascending:false});
+  const ids = (data||[]).map(r=>r.reader_id);
   const el = document.getElementById('banned-list');
-  if (!bannedIds.length) { el.innerHTML = '<div class="empty-state">No banned readers</div>'; return; }
-  el.innerHTML = bannedIds.map(id=>`
+  if (!ids.length) { el.innerHTML='<div class="empty-state">No banned readers</div>'; return; }
+  el.innerHTML = ids.map(id=>`
     <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--rule)">
       <span style="font-family:monospace;font-size:13px;flex:1">${id}</span>
       <button class="btn btn-sm" onclick="unban('${id}')">Unban</button>
@@ -829,94 +489,77 @@ async function loadBanned() {
 }
 
 async function banReader(id) {
-  const rid = id || document.getElementById('ban-id-input').value.trim();
-  if (!rid) return;
-  if (!confirm(`Ban ${rid}? They won't be able to submit responses.`)) return;
-  await sb.from('banned').upsert({ reader_id: rid });
-  toast(`${rid} banned`);
-  document.getElementById('ban-id-input').value = '';
+  if (!confirm(`Ban ${id}? They won't be able to submit responses.`)) return;
+  await sb.from('banned').upsert({reader_id:id});
+  toast(`${id} banned`);
+  if (selectedRespWeek) loadResponses(selectedRespWeek);
+}
+
+async function banReaderManual() {
+  const id = document.getElementById('ban-id-input').value.trim();
+  if (!id) return;
+  await banReader(id);
+  document.getElementById('ban-id-input').value='';
   loadBanned();
 }
 
 async function unban(id) {
-  await sb.from('banned').delete().eq('reader_id', id);
+  await sb.from('banned').delete().eq('reader_id',id);
   toast(`${id} unbanned`);
   loadBanned();
 }
 
-async function runModeration() {
-  if (!apiKey) { toast('Add your Anthropic API key in Settings first'); return; }
-  const out = document.getElementById('moderation-output');
-  out.innerHTML = '<div class="loading"><div class="spinner"></div> Scanning...</div>';
-  const { data: resps } = await sb.from('responses').select('*').order('created_at', {ascending:false}).limit(100);
-  if (!resps?.length) { out.innerHTML = '<div class="empty-state">No responses to scan</div>'; return; }
-  const sample = resps.map(r=>`${r.reader_id}: "${r.answer}"`).join('\n');
-  const prompt = `You are a content moderator for a book club app. Review these responses and flag any that are spam, abusive, offensive, or entirely off-topic. For each flagged item return the reader_id and reason. If nothing is flagged return an empty array. Return ONLY a JSON array of {reader_id, reason}. No preamble.
-
-${sample}`;
-  try {
-    const raw = await callClaude(prompt, 600);
-    const flags = JSON.parse(raw.replace(/```json|```/g,'').trim());
-    if (!flags.length) { out.innerHTML = '<div class="success-msg">No issues found in recent responses ✓</div>'; return; }
-    out.innerHTML = `<p style="font-size:13px;color:var(--warn);margin-bottom:8px">${flags.length} flagged response${flags.length!==1?'s':''}</p>` +
-      flags.map(f=>`<div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:var(--warn-light);border-radius:7px;margin-bottom:6px">
-        <div style="flex:1"><div style="font-family:monospace;font-size:12px;color:var(--warn)">${f.reader_id}</div><div style="font-size:13px;margin-top:3px">${f.reason}</div></div>
-        <button class="btn btn-sm btn-danger" onclick="banReader('${f.reader_id}')">Ban</button>
-      </div>`).join('');
-  } catch(e) { out.innerHTML = '<div class="error-msg">Moderation scan failed. Try again.</div>'; }
-}
-
 // ── SETTINGS ──
-function saveSettings() {
-  const newPass = document.getElementById('new-passcode').value;
+function savePasscode() {
   const current = document.getElementById('current-passcode').value;
+  const newPass = document.getElementById('new-passcode').value;
   const stored = localStorage.getItem('bc_admin_pass') || CONFIG.adminPass;
-  if (newPass && current !== stored) { toast('Current passcode incorrect'); return; }
-  if (newPass) localStorage.setItem('bc_admin_pass', newPass);
-  const key = document.getElementById('api-key-input').value.trim();
-  if (key) { apiKey = key; localStorage.setItem('bc_api_key', key); }
-  toast('Settings saved ✓');
+  if (current !== stored) { toast('Current passcode is incorrect'); return; }
+  if (!newPass) { toast('Please enter a new passcode'); return; }
+  localStorage.setItem('bc_admin_pass', newPass);
+  document.getElementById('current-passcode').value='';
+  document.getElementById('new-passcode').value='';
+  toast('Passcode updated ✓');
 }
 
-// ── ARCHIVE ──
 async function archiveBook() {
-  if (!bookData) { toast('No active book'); return; }
-  if (!confirm('Archive this book and start fresh? All data is preserved in Supabase.')) return;
-  await sb.from('books').update({ active: false }).eq('id', bookData.id);
+  if (!bookData) { toast('No active book to archive'); return; }
+  if (!confirm(`Archive "${bookData.title}"? All responses are kept in the database.`)) return;
+  await sb.from('books').update({active:false}).eq('id',bookData.id);
   bookData = null; weeksData = [];
-  document.getElementById('admin-book-title').value = '';
-  document.getElementById('admin-book-desc').value = '';
-  document.getElementById('admin-book-guide').value = '';
-  document.getElementById('admin-book-start').value = '';
-  document.getElementById('admin-book-end').value = '';
+  document.getElementById('admin-book-title').value='';
+  document.getElementById('admin-book-desc').value='';
+  document.getElementById('admin-book-start').value='';
+  document.getElementById('admin-book-end').value='';
   renderWeeksList();
-  toast('Book archived. Set up your next book ✓');
+  toast('Book archived. Ready for the next one ✓');
+  loadMemberView();
 }
 
 // ── MEMBER VIEW ──
 async function loadMemberView() {
   if (!sb) {
-    document.getElementById('member-loading').style.display = 'none';
-    document.getElementById('member-no-book').style.display = 'block';
-    document.getElementById('member-no-book').textContent = 'App not yet configured. Check back soon!';
+    document.getElementById('member-loading').style.display='none';
+    document.getElementById('member-no-book').style.display='block';
     return;
   }
   const readerId = getReaderId();
   document.getElementById('display-reader-id').textContent = readerId;
-  const { data: book } = await sb.from('books').select('*').eq('active', true).single();
-  document.getElementById('member-loading').style.display = 'none';
-  if (!book) { document.getElementById('member-no-book').style.display = 'block'; return; }
+  const { data: book } = await sb.from('books').select('*').eq('active',true).single();
+  document.getElementById('member-loading').style.display='none';
+  if (!book) { document.getElementById('member-no-book').style.display='block'; return; }
   bookData = book;
-  document.getElementById('member-book-title').textContent = book.title;
-  document.getElementById('member-book-desc').textContent = book.description || '';
-  const s = book.start_date ? new Date(book.start_date).toLocaleDateString('en-GB',{day:'numeric',month:'long'}) : '';
-  const e = book.end_date ? new Date(book.end_date).toLocaleDateString('en-GB',{day:'numeric',month:'long'}) : '';
-  document.getElementById('member-book-dates').textContent = s && e ? `${s} – ${e}` : '';
+  document.getElementById('member-book-title').textContent = book.title||'';
+  document.getElementById('member-book-desc').textContent = book.description||'';
+  if (book.start_date && book.end_date) {
+    const fmt = d => new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'long'});
+    document.getElementById('member-book-dates').textContent = fmt(book.start_date) + ' – ' + fmt(book.end_date);
+  }
   const { data: weeks } = await sb.from('weeks').select('*').order('created_at');
-  weeksData = weeks || [];
-  document.getElementById('member-content').style.display = 'block';
+  weeksData = weeks||[];
+  document.getElementById('member-content').style.display='block';
   renderMemberWeekTabs();
-  if (weeksData.length) loadMemberWeek(weeksData[weeksData.length - 1].id);
+  if (weeksData.length) loadMemberWeek(weeksData[weeksData.length-1].id);
 }
 
 function renderMemberWeekTabs() {
@@ -925,55 +568,55 @@ function renderMemberWeekTabs() {
 }
 
 async function loadMemberWeek(weekId) {
-  document.querySelectorAll('#member-week-tabs .week-pill').forEach(p=>p.classList.toggle('active', p.textContent===weeksData.find(w=>w.id===weekId)?.label));
+  document.querySelectorAll('#member-week-tabs .week-pill').forEach(p=>{
+    p.classList.toggle('active', weeksData.find(w=>w.id===weekId)?.label===p.textContent);
+  });
   const week = weeksData.find(w=>w.id===weekId);
   const readerId = getReaderId();
-  const { data: existing } = await sb.from('responses').select('*').eq('week_id', weekId).eq('reader_id', readerId);
+  const { data: banned } = await sb.from('banned').select('reader_id').eq('reader_id',readerId);
+  const isBanned = banned && banned.length > 0;
+  const { data: existing } = await sb.from('responses').select('*').eq('week_id',weekId).eq('reader_id',readerId);
   const saved = {};
   (existing||[]).forEach(r=>{ saved[r.question_index]=r.answer; });
+  const hasAnswered = Object.keys(saved).length > 0;
   const el = document.getElementById('member-week-content');
+  if (isBanned) {
+    el.innerHTML = '<div class="error-msg">Your access has been restricted. Please contact the organiser.</div>';
+    return;
+  }
   el.innerHTML = `
     <div class="card">
       <div class="card-title">${week.label}</div>
+      ${hasAnswered ? '<div class="success-msg">Your responses are saved. You can update them any time before the week closes.</div>' : ''}
       ${(week.questions||[]).map((q,i)=>`
         <div class="question-block">
           <div class="q-label">Question ${i+1}</div>
           <div class="q-text">${q}</div>
-          <textarea id="mq-${i}" placeholder="Share your thoughts..." rows="3">${saved[i]||''}</textarea>
+          <textarea id="mq-${i}" placeholder="Share your thoughts…" rows="3">${saved[i]||''}</textarea>
         </div>`).join('')}
-      <div id="submit-msg-${weekId}"></div>
+      <div id="submit-msg"></div>
       <div class="row-end">
-        <button class="btn btn-primary" onclick="submitMemberResponses('${weekId}', ${(week.questions||[]).length})">Save my responses</button>
+        <button class="btn btn-primary" onclick="submitMemberResponses('${weekId}',${(week.questions||[]).length})">
+          ${hasAnswered ? 'Update my responses' : 'Save my responses'}
+        </button>
       </div>
     </div>`;
 }
 
 async function submitMemberResponses(weekId, qCount) {
   const readerId = getReaderId();
-  const { data: banned } = await sb.from('banned').select('reader_id').eq('reader_id', readerId).single();
-  if (banned) { toast('Your account has been restricted. Contact the organiser.'); return; }
+  const { data: banned } = await sb.from('banned').select('reader_id').eq('reader_id',readerId);
+  if (banned && banned.length) { toast('Your access has been restricted'); return; }
   const upserts = [];
   for (let i=0; i<qCount; i++) {
     const ans = document.getElementById('mq-'+i)?.value?.trim();
-    if (ans) upserts.push({ week_id: weekId, reader_id: readerId, question_index: i, answer: ans, book_id: bookData?.id });
+    if (ans) upserts.push({ week_id:weekId, reader_id:readerId, question_index:i, answer:ans, book_id:bookData?.id });
   }
   if (!upserts.length) { toast('Please write at least one response'); return; }
-  await sb.from('responses').upsert(upserts, { onConflict: 'week_id,reader_id,question_index' });
-  const msgEl = document.getElementById('submit-msg-'+weekId);
-  if (msgEl) msgEl.innerHTML = '<div class="success-msg" style="margin-top:.75rem">Responses saved ✓ You can come back and edit any time.</div>';
+  const { error } = await sb.from('responses').upsert(upserts, {onConflict:'week_id,reader_id,question_index'});
+  if (error) { toast('Could not save — please try again'); return; }
+  document.getElementById('submit-msg').innerHTML = '<div class="success-msg" style="margin-top:.75rem">Responses saved ✓ Come back any time to update them.</div>';
   toast('Saved ✓');
-}
-
-// ── CLAUDE API ──
-async function callClaude(prompt, maxTokens=1000) {
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01' },
-    body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: maxTokens, messages: [{ role: 'user', content: prompt }] })
-  });
-  const d = await res.json();
-  if (d.error) throw new Error(d.error.message);
-  return d.content.map(c=>c.text||'').join('');
 }
 
 // ── BOOT ──
